@@ -44,15 +44,11 @@ public fun register_proposal(self: &mut Dashboard, proposal_id: ID){
 #[test]
 fun test_module_init() {
     use sui::test_scenario;
-    use voting_contract::proposal::{Self};
 
     let creator = @0x1;
-    let jinali = @0x2;  
 
     let mut scenario = test_scenario::begin(creator);
     {
-
-        let sender = scenario.ctx().sender();
         // create the dashboard
         init(scenario.ctx());
     };
@@ -67,16 +63,6 @@ fun test_module_init() {
 
         // returning the dashboard to the scenario
         test_scenario::return_shared(dashboard);
-    };
-
-    scenario.next_tx(jinali);
-    {
-
-        let title  = b"test title".to_string();
-        let description = b"test description".to_string();
-        let expiration = 1000000000;
-        proposal::create(title, description, expiration, scenario.ctx());
-
     };
 
     scenario.end();

@@ -54,3 +54,43 @@ it means that at the end of your function, there’s still a resource (the propo
 
 
 
+/*
+
+in move we cannot access the fields of a struct directly from another module. 
+we need to use a getter function to access the fields of a struct if we want to access it from another module.
+
+*/
+
+public fun get_title(self: &Proposal): String {
+    self.title
+}
+
+public fun get_description(self: &Proposal): String {
+    self.description
+}
+
+public fun get_expiration(self: &Proposal): u64 {
+    self.expiration
+}
+
+public fun get_yes_votes(self: &Proposal): u64 {
+    self.yes_votes
+}
+
+public fun get_no_votes(self: &Proposal): u64 {
+    self.no_votes
+}
+
+public fun get_voter_registry(self: &Proposal): vector<address> {
+    self.voter_registry
+}
+
+public fun get_creator(self: &Proposal): address {
+    self.creator
+}
+
+
+
+
+
+
