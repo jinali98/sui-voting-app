@@ -1,23 +1,34 @@
+import { ConnectButton } from "@mysten/dapp-kit";
+import { useNavigation } from "../providers/navigation/navigation-context";
 
 const Navbar = () => {
-    const currentPage: string = "/wallet";
-  
-    return (
-      <nav className="bg-gray-200 dark:bg-gray-800 p-4 shadow-md">
+  const {currentPage, navigate} = useNavigation()
+
+  return (
+    <nav className="bg-gray-200 dark:bg-gray-800 p-4 shadow-md">
+      <div className="flex justify-between">
         <ul className="flex space-x-6">
           <li>
-            <button className={`px-4 py-2 rounded ${currentPage === "/" ? "bg-blue-400 underline" : ""}`}>
+            <button
+              onClick={() => navigate("/")}
+              className={`px-4 py-2 rounded ${currentPage === "/" ? "bg-blue-400 underline" : ""}`}
+            >
               Home
             </button>
           </li>
           <li>
-            <button className={`px-4 py-2 rounded ${currentPage === "/wallet" ? "bg-blue-400 underline" : ""}`}>
+            <button
+              onClick={() => navigate("/wallet")}
+              className={`px-4 py-2 rounded ${currentPage === "/wallet" ? "bg-blue-400 underline" : ""}`}
+            >
               Wallet
             </button>
           </li>
         </ul>
-      </nav>
-    )
-  }
-  
-  export default Navbar;
+        <ConnectButton />
+      </div>
+    </nav>
+  )
+}
+
+export default Navbar;

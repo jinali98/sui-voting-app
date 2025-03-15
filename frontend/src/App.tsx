@@ -1,14 +1,13 @@
 import React from "react";
-import { useTheme } from "./providers/theme/ThemeContext";
 import ProposalView from "./views/proposal-view";
 import Navbar from "./components/navbar";
 import WalletView from "./views/wallet-view";
-
+import { useNavigation } from "./providers/navigation/navigation-context";
 const App: React.FC = () => {
-  const { darkMode }  = useTheme();
+  const theme ="dark"
 
   const Pages = () => {
-    const currentPage: string = "/";
+    const { currentPage } = useNavigation();
   
     switch(currentPage) {
       case "/":
@@ -21,7 +20,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className={`${darkMode ? "dark" : ""}`}>
+    <div className={`${theme}`}>
       <div className="min-h-screen bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-100">
         <Navbar />
         <div className="max-w-screen-xl m-auto pt-16">

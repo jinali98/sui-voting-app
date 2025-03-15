@@ -1,5 +1,4 @@
-
-module voting_contract::dashboard;
+module voting_contract::proposal;
 
 use std::string::String;
 
@@ -27,7 +26,7 @@ If the function only read data from the context without modifying it, you could 
 
 */
 
-public fun create_proposal(title: String, description: String, expiration: u64, ctx: &mut TxContext) {
+public fun create(title: String, description: String, expiration: u64, ctx: &mut TxContext) {
 
     let proposal = Proposal {
         id: object::new(ctx),
@@ -52,10 +51,6 @@ it means that at the end of your function, there’s still a resource (the propo
 */
     transfer::share_object(proposal);
 }
-
-
-
-
 
 
 
