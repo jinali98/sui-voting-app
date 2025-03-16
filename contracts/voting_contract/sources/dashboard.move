@@ -6,12 +6,19 @@ public struct Dashboard has key {
     proposal_ids: vector<ID>
 }
 
+public struct AdminCapability has key {
+    id: UID,
+}
+
 /*
 init function only run once when the contract is deployed
 */
 
 fun init(ctx: &mut TxContext) {
    init_dashboard(ctx);
+
+   // transfer the AdminCapability to the sender
+   transfer::transfer(AdminCapability{id: object::new(ctx)}, ctx.sender());
 }
 
 public fun init_dashboard(ctx: &mut TxContext){

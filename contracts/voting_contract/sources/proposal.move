@@ -1,6 +1,7 @@
 module voting_contract::proposal;
 
 use std::string::String;
+use voting_contract::dashboard::AdminCapability;
 
 public struct Proposal has key {
     id: UID,
@@ -26,7 +27,7 @@ If the function only read data from the context without modifying it, you could 
 
 */
 
-public fun create(title: String, description: String, expiration: u64, ctx: &mut TxContext) {
+public fun create(_admin: &AdminCapability, title: String, description: String, expiration: u64, ctx: &mut TxContext) {
 
     let proposal = Proposal {
         id: object::new(ctx),
