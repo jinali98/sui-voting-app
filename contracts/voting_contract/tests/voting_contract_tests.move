@@ -6,7 +6,7 @@ module voting_contract::voting_contract_tests;
 fun test_create_proposal() {
     use sui::test_scenario;
     use voting_contract::proposal::{Self, Proposal};
-
+    use voting_contract::dashboard::AdminCapability;
     let user = @0x2;
 
     let mut scenario = test_scenario::begin(user);
@@ -18,12 +18,13 @@ fun test_create_proposal() {
 
     scenario.next_tx(user);
     {
-
+        let admin = scenario.take_from_sender<AdminCapability>();
         let title  = b"test title".to_string();
         let description = b"test description".to_string();
         let expiration = 1000000000;
-        proposal::create(title, description, expiration, scenario.ctx());
+        proposal::create(&admin, title, description, expiration, scenario.ctx());
 
+        test_scenario::return_to_sender(&scenario, admin);
     };
 
     scenario.next_tx(user);
